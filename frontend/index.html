@@ -1,0 +1,316 @@
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvoicePro - Invoice & Receipt Generator</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-icon">IN</div>
+        <div>
+          <h1>InvoicePro</h1>
+          <p>Invoice &amp; Payment Management</p>
+        </div>
+      </div>
+
+      <div class="header-status">
+        <span class="status-dot"></span>
+        Ready to create invoices
+      </div>
+    </header>
+
+    <section class="dashboard-welcome">
+      <div>
+        <h2>Invoice Dashboard</h2>
+        <p>Create invoices, track payments, and manage your customers.</p>
+      </div>
+    </section>
+
+    
+<div class="invoice-search">
+  <label for="invoiceSearch">Search saved invoices</label>
+
+  <input
+    type="search"
+    id="invoiceSearch"
+    placeholder="Search invoice number or customer name..."
+    autocomplete="off"
+  >
+
+  <label for="statusFilter">Filter by payment status:</label>
+
+  <select id="statusFilter">
+    <option value="all">All Invoices</option>
+    <option value="Paid">Paid</option>
+    <option value="Partially Paid">Partially Paid</option>
+    <option value="Unpaid">Unpaid</option>
+  </select>
+
+  <p id="invoiceSearchMessage" role="status" aria-live="polite"></p>
+
+  <ul id="searchResultsList" class="search-results"></ul>
+</div>
+
+
+    <!-- Dashboard summary: each card appears only once -->
+    <section class="summary-cards">
+
+      <article class="summary-card">
+        <div class="summary-icon blue">INV</div>
+        <p>Total Invoices</p>
+        <h3 id="dashboardInvoiceCount">0</h3>
+        <span>Saved invoices</span>
+      </article>
+
+      <article class="summary-card">
+        <div class="summary-icon green">$</div>
+        <p>Total Revenue</p>
+        <h3 id="dashboardRevenue">ETB 0.00</h3>
+        <span>Value of saved invoices</span>
+      </article>
+
+      <article class="summary-card">
+        <div class="summary-icon orange">!</div>
+        <p>Outstanding Payments</p>
+        <h3 id="dashboardOutstanding">ETB 0.00</h3>
+        <span>Unpaid balances</span>
+      </article>
+
+      <article class="summary-card">
+        <div class="summary-icon green">✓</div>
+        <p>Paid Invoices</p>
+        <h3 id="dashboardPaidCount">0</h3>
+        <span>Fully paid invoices</span>
+      </article>
+
+      <article class="summary-card">
+        <div class="summary-icon orange">◐</div>
+        <p>Partially Paid</p>
+        <h3 id="dashboardPartialCount">0</h3>
+        <span>Invoices with payments remaining</span>
+      </article>
+
+      <article class="summary-card">
+        <div class="summary-icon orange">!</div>
+        <p>Unpaid Invoices</p>
+        <h3 id="dashboardUnpaidCount">0</h3>
+        <span>Invoices with no payment</span>
+      </article>
+
+    </section>
+    <!-- End dashboard summary -->
+
+    <header class="topbar">
+      <h1>Invoice Generator</h1>
+      <p>Create professional invoices for your business</p>
+    </header>
+
+    <main class="container">
+
+      <section class="card">
+        <h2>Business Information</h2>
+
+        <label for="business">Business name</label>
+        <input id="business" type="text" placeholder="Your business name">
+
+        <label for="businessEmail">Business email</label>
+        <input id="businessEmail" type="email" placeholder="you@example.com">
+<label for="businessPhone">Business Phone</label>
+<input
+  id="businessPhone"
+  type="tel"
+  placeholder="e.g. +251 9XX XXX XXX"
+>
+
+<label for="businessAddress">Business Address</label>
+<textarea
+  id="businessAddress"
+  placeholder="Enter your business address"
+  rows="3"
+></textarea>
+        <div class="form-group">
+          <label for="businessLogo">Business Logo (optional):</label>
+          <input
+            type="file"
+            id="businessLogo"
+            accept="image/png,image/jpeg,image/webp"
+          >
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Customer Information</h2>
+
+        <label for="customer">Customer name</label>
+        <input id="customer" type="text" placeholder="Customer full name">
+
+        <label for="customerEmail">Customer email</label>
+        <input id="customerEmail" type="email" placeholder="customer@example.com">
+
+        <label for="invoiceNumber">Invoice number</label>
+        <input id="invoiceNumber" type="text" value="INV-001">
+
+        <label for="invoiceDate">Invoice date</label>
+        <input id="invoiceDate" type="date">
+
+        <div class="form-group">
+          <label for="currency">Invoice Currency:</label>
+          <select id="currency">
+            <option value="ETB">Ethiopian Birr (ETB)</option>
+            <option value="USD">US Dollar (USD)</option>
+            <option value="EUR">Euro (EUR)</option>
+            <option value="GBP">British Pound (GBP)</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Items or Services</h2>
+
+        <div id="itemsContainer">
+          <div class="invoice-item">
+            <label>Description</label>
+            <input
+              class="item-description"
+              type="text"
+              placeholder="e.g. Website design"
+            >
+
+            <div class="two-columns">
+              <div>
+                <label>Quantity</label>
+                <input
+                  class="item-quantity"
+                  type="number"
+                  min="1"
+                  value="1"
+                >
+              </div>
+
+              <div>
+                <label>Price per item</label>
+                <input
+                  class="item-price"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value="0"
+                >
+              </div>
+            </div>
+
+            <p>Item total: <strong class="item-total">0.00</strong></p>
+          </div>
+        </div>
+
+        <button id="addItemButton" type="button">
+          + Add Another Item
+        </button>
+
+        <div class="adjustments">
+          <label for="discount">Discount (%)</label>
+          <input
+            id="discount"
+            type="number"
+            min="0"
+            max="100"
+            step="0.01"
+            value="0"
+          >
+
+          <label for="tax">Tax (%)</label>
+          <input
+            id="tax"
+            type="number"
+            min="0"
+            max="100"
+            step="0.01"
+            value="0"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="amountPaid">Amount Paid:</label>
+          <input
+            type="number"
+            id="amountPaid"
+            min="0"
+            step="0.01"
+            value="0"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="paymentStatus">Payment Status:</label>
+          <select id="paymentStatus">
+            <option value="unpaid">Unpaid</option>
+            <option value="partial">Partially Paid</option>
+            <option value="paid">Paid</option>
+          </select>
+        </div>
+
+        <p>Amount Remaining: <strong id="amountRemaining">0.00</strong></p>
+        <p>Subtotal: <strong id="subtotal">0.00</strong></p>
+        <p>Discount amount: <strong id="discountAmount">0.00</strong></p>
+        <p>Tax amount: <strong id="taxAmount">0.00</strong></p>
+
+        <p class="total">
+          Grand Total: <strong id="total">0.00</strong>
+        </p>
+
+        <div class="action-buttons">
+          <button id="previewButton" type="button">Preview Invoice</button>
+
+          <button id="printButton" type="button">Print / Save as PDF</button>
+           <button type="button" id="printReceiptButton">
+            Print Payment Receipt
+          </button>
+          <button id="receiptButton" type="button">
+            Generate Payment Receipt
+          </button>
+
+          <button id="saveInvoiceButton" type="button">Save Invoice</button>
+
+          <button type="button" id="clearFormBtn">New Invoice</button>
+
+          <button type="button" id="exportInvoicesButton">
+            Export Invoices to CSV
+          </button>
+          <button type="button" id="backupInvoicesBtn">
+    Download Backup
+  </button>
+
+  <button type="button" id="restoreInvoicesBtn">
+    Restore Backup
+  </button>
+
+  <input
+    type="file"
+    id="restoreInvoicesFile"
+    accept=".json,application/json"
+    hidden
+  />
+        </div>
+
+        <section id="savedInvoicesSection">
+          <h2>Saved Invoices</h2>
+          <p id="savedInvoicesMessage">
+            Your saved invoices will appear here.
+          </p>
+          <ul id="savedInvoicesList"></ul>
+          <div id="loadInvoiceContainer"></div>
+        </section>
+
+        <p id="message" role="status"></p>
+      </section>
+
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+  </html>
