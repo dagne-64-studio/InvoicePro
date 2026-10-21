@@ -5,7 +5,11 @@ InvoicePro is a responsive web application that helps small businesses create in
 ## Live Demo
 
 [Open InvoicePro](https://dagne-64-studio.github.io/InvoicePro/)
+**Try InvoicePro online:** https://dagne-64-studio.github.io/InvoicePro/
 
+**Source Code:** https://github.com/dagne-64-studio/InvoicePro
+
+InvoicePro helps small businesses create invoices, track payments, calculate outstanding balances, and print receipts.
 ## Features
 
 - Create and manage invoices
